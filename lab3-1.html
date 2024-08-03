@@ -9030,9 +9030,12 @@ Secuencia Predicha:
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Preguntas">Preguntas<a class="anchor-link" href="#Preguntas">¶</a></h4><p>Ya hemos visto el funcionamiento general de nuestra red RNN, viendo las gráficas de arriba, <strong>responda</strong> lo siguiente dentro de esta celda</p>
 <ul>
-<li>¿Qué interpretación le da a la separación de las graficas de training y validation?</li>
-<li>¿Cree que es un buen modelo basado solamente en el loss?</li>
-<li>¿Cómo deberían de verse esas gráficas en un modelo ideal?</li>
+<li><strong>¿Qué interpretación le da a la separación de las graficas de training y validation?</strong>
+En este caso, podemos decir que depende del contexto, tomando en cuenta que las líneas no están tan separadas podemos decir que el ajuste es correcto. Debido a que la pérdida de entramiento y validación son cercanas entre sí, podemos decir que se ha ajustado bien. Pero este tipo de conclusiones son variantes, puesto que hay sectores en los que se separan demasiado, esto puede indicar un overfitting.</li>
+<li><strong>¿Cree que es un buen modelo basado solamente en el loss?</strong>
+Consideramos que depende, y que no siempre, puesto que no es suficiente decir que un modelo es bueno solo por la métrica loss, que a pesar que es importante, no es suficiente. Por ejemplo hay otras métricas como la precisión, el recall, etc. Además, podemos observar que al final, incluso hace overfitting, puesto que la validación comienza a subir y a alejarse del train.</li>
+<li><strong>¿Cómo deberían de verse esas gráficas en un modelo ideal?</strong>
+Pues, en resumen, ambas gráficas deberían mostrar un descenso, converger a un valor y estabilizarse, sin fluctuaciones, esperando que las pérdidas sean bajas o casi nulas.</li>
 </ul>
 </div>
 </div>
@@ -9842,6 +9845,20 @@ Secuencia Predicha:
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ab8de709">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c8692424">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -9851,9 +9868,12 @@ Secuencia Predicha:
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Preguntas">Preguntas<a class="anchor-link" href="#Preguntas">¶</a></h4><p><strong>Responda</strong> lo siguiente dentro de esta celda</p>
 <ul>
-<li>¿Qué modelo funcionó mejor? ¿RNN tradicional o el basado en LSTM? ¿Por qué?</li>
-<li>Observen la gráfica obtenida arriba, ¿en qué es diferente a la obtenida a RNN? ¿Es esto mejor o peor? ¿Por qué?</li>
-<li>¿Por qué LSTM puede funcionar mejor con secuencias largas?</li>
+<li><strong>¿Qué modelo funcionó mejor? ¿RNN tradicional o el basado en LSTM? ¿Por qué?</strong>
+Comparando las pérdidas de ambos, podemos decir que el modelo basado en LSTM tiene pérdidas de validación más bajas a diferencia de la RNN normal. Entonces podemos decir que la generalización del LSTM es más adecuada y tiene un mejor rendimiento para los datos de validación.</li>
+<li><strong>Observen la gráfica obtenida arriba, ¿en qué es diferente a la obtenida a RNN? ¿Es esto mejor o peor? ¿Por qué?</strong>
+Podemos ver que la pérdida de RNN es más alta y muestra tendencia a aumentar (overfitting), además la LSTM tiene pérdidas más bajas y se mantiene relativamente estable, generalizando correctamente, además, se puede ver que la pérdida de entrenamiento se comporta mejor en el caso de LSTM.</li>
+<li><strong>¿Por qué LSTM puede funcionar mejor con secuencias largas?</strong>
+Esto es debido a la estructura que manejan, basada en gates, memorias y demás, esto le da la virtud de mitigar el shadow gradient, lo que permite capturar y guardar información importante por más tiempo que una RNN normal.</li>
 </ul>
 </div>
 </div>
@@ -10237,9 +10257,12 @@ Secuencia Predicha:
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Preguntas">Preguntas<a class="anchor-link" href="#Preguntas">¶</a></h4><p><strong>Responda</strong> lo siguiente dentro de esta celda</p>
 <ul>
-<li>Compare las graficas obtenidas en el LSTM "a mano" y el LSTM "usando PyTorch, ¿cuál cree que es mejor? ¿Por qué?</li>
-<li>Compare la secuencia target y la predicha de esta parte, ¿en qué parte falló el modelo?</li>
-<li>¿Qué sucede en el código donde se señala "NOTA 1" y "NOTA 2"? ¿Para qué son necesarias estas líneas?</li>
+<li><strong>Compare las graficas obtenidas en el LSTM "a mano" y el LSTM "usando PyTorch, ¿cuál cree que es mejor? ¿Por qué?</strong>
+En definitiva es mejor la de PyTorch, principalmente porque PyTorch optimiza este tipo de cálculos y tiene técnicas más avanzadas que mejoran la precisión y eficiencia de los modelos. Por otro lado, PyTorch se encarga de muchos de estos sistemas complejos, como las gates y las memorias, que son específicas, también influyendo en los entrenamientos y demás, lo que mejora la generalización y da pérdidas más bajas</li>
+<li><strong>Compare la secuencia target y la predicha de esta parte, ¿en qué parte falló el modelo?</strong>
+De buenas a primeras se ve que falló en una interpretación "precipitada" podría decirse, que calculó mal el siguiente elemento luego de a, lo que afectó el resto de la secuencia, predijo 'b' en lugar de 'a', y obviamente dió un EOS antes de lo esperado. En especial, pareciera que el modelo tiene problemas para mantener la integridad y para predecir la longitud de la secuencia de forma correcta.</li>
+<li><strong>¿Qué sucede en el código donde se señala "NOTA 1" y "NOTA 2"? ¿Para qué son necesarias estas líneas?</strong>
+Este par de líneas son importantes para el entrenamiento de la LSTM, en la primera nota se realiza el feedforward para obtener los guesses y los estados ocultos, mientras que la segunda nota realiza el backpropagation que calcula las pérdidas, gradientes y demás que ajustan el modelo.</li>
 </ul>
 </div>
 </div>
